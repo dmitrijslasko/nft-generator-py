@@ -1,4 +1,4 @@
-#NFT Image Generator
+# NFT Image Generator
 ### A Python script to generate NFT-style images (different combinations of layers.)
 
 #### The script contains two directories:
