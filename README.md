@@ -5,7 +5,7 @@
 
 ##### The script contains two directories:
 
-**(1) layers**
+**(1) layers** \
 This folder should contain the layers to be used in the image generation.
 **It is advised to use the format that already exists there, i.e. "1 body", "2 eyes", etc.**
 Here, the number defines the order of how the layers get added to the image (the lowest the number – the earlier it is used in the generation).
@@ -16,7 +16,7 @@ If there is demand, the script will later get updated to allow custom output ima
 
   
 
-**(2) results**
+**(2) results** \
 This folder will contain the results of the generation.
 
   
