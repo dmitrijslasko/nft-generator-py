@@ -22,12 +22,11 @@ This folder will contain the results of the generation.
 
 ### Usage & flags:
 
-1) Clone the folder to your system (git clone ...)
-2) Create virtual environment (python -m venv .venv)
-3) Install the required dependencies (pip install -r requirements.txt)
-4) Run the script (python generate.py)
+1) Clone the folder to your system (git clone ...) \
+2) Create virtual environment (python -m venv .venv) \
+3) Install the required dependencies (pip install -r requirements.txt) \
+4) Run the script (python generate.py) \
 
- 
 
 #### Flags:
 
@@ -46,13 +45,11 @@ Currently, because of the output size limitations, the advised size to be used f
 
 #### Launch examples:
 
-python generate.py --random 5: generate 5 random image combinations
-python generate.py --random 10: generate 10 random image combinations
+python generate.py --random 5: generate 5 random image combinations \
+python generate.py --random 10: generate 10 random image combinations \
 python generate.py --all: generate all possible image combinations
 
-  
-
 ##### Message me here on github or anywhere else if you have any questions, want to request a feature or want to collaborate.
-E-mail: dmitrijs.lasko@gmail.com
+E-mail: dmitrijs.lasko@gmail.com \
 Instagram: @dimilasko
 
