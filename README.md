@@ -1,9 +1,10 @@
 
-# NFT Image Generator
+# NFT Image Generator (Layers to Single Image)
 
-##### A Python script to generate NFT-style images (unique combinations of multiple layers).
+#### A Python script to generate NFT-style images (unique combinations of multiple individual layers)
 
-##### The script contains two directories:
+## Description
+#### The script contains two directories:
 
 **(1) layers** \
 This folder should contain the layers to be used in the image generation.
@@ -27,8 +28,9 @@ This folder will contain the results of the generation.
 2) Create virtual environment (python -m venv .venv)
 3) Activate virtual environment (source ./venv/bin/activate)
 4) Install the required dependencies (pip install -r requirements.txt)
-5) Run the script (python generate.py)
-6) Open the folder (open .) to see the results.
+5) Paste the layer individual images (PNG) into the layers folder, grouped in individual layer directories
+6) Run the script (python generate.py)
+7) Open the folder (open .) to see the results (in the results folder)
 
 
 #### Flags:
