@@ -24,8 +24,9 @@ This folder will contain the results of the generation.
 
 1) Clone the folder to your system (git clone ...)
 2) Create virtual environment (python -m venv .venv)
-3) Install the required dependencies (pip install -r requirements.txt)
-4) Run the script (python generate.py)
+3) Activate virtual environment (source ./venv/bin/activate)
+4) Install the required dependencies (pip install -r requirements.txt)
+5) Run the script (python generate.py)
 
 
 #### Flags:
