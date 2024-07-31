@@ -9,6 +9,7 @@
 This folder should contain the layers to be used in generation.
 **It is advised to use the format that already exists there, i.e. "1 body", "2 eyes", etc.**
 Here, the number defines the order of how the layers get added to the image (the lowest the number – the earlier it is used in the generation).
+The number of directories (layers) can be any, it is not anyhow limited.
 
 **Filenames inside the folders don't matter that much, but they will affect the resulting file names.**
 If there is demand, the script will later get updated to allow custom output image size / quality (ppi).
