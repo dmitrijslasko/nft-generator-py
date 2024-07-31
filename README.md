@@ -35,7 +35,7 @@ This folder will contain the results of the generation.
 -r, --random [count]: generate a number of random combinations	\
 -b, --black: set the background color to black	\
 -w, --white: set the background color to white	\
--t, --transparent: set the background color to transparent (default option)	\
+-t, --transparent: set the background color to transparent (default option)
 
 ##### IN PROGRESS:
 
