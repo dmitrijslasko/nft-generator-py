@@ -214,7 +214,7 @@ def parse_args():
 	global output_image_size
 
 	try:
-		layer_image_size = get_layer_size()
+		layer_image_size = output_image_size
 	except Exception as e:
 		print(e)
 		print("I GUESS YOUR LAYERS FOLDER IS EMPTY? PLEASE CHECK IT...")
