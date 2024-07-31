@@ -1,15 +1,15 @@
 
 # NFT Image Generator
 
-##### A Python script to generate NFT-style images (different combinations of layers.)
+##### A Python script to generate NFT-style images (unique combinations of multiple layers).
 
 ##### The script contains two directories:
 
 **(1) layers**
-This folder should contain the layers to be used in generation.
+This folder should contain the layers to be used in the image generation.
 **It is advised to use the format that already exists there, i.e. "1 body", "2 eyes", etc.**
 Here, the number defines the order of how the layers get added to the image (the lowest the number – the earlier it is used in the generation).
-The number of directories (layers) can be any, it is not anyhow limited.
+The number of directories (layers) can be any number, it is not anyhow limited.
 
 **Filenames inside the folders don't matter that much, but they will affect the resulting file names.**
 If there is demand, the script will later get updated to allow custom output image size / quality (ppi).
@@ -28,18 +28,19 @@ This folder will contain the results of the generation.
 3) Activate virtual environment (source ./venv/bin/activate)
 4) Install the required dependencies (pip install -r requirements.txt)
 5) Run the script (python generate.py)
+6) Open the folder (open .) to see the results.
 
 
 #### Flags:
 
 --all: generate all possible combinations. Before the launch, the script will calculate the number of possible combinations and ask for a y/n confirmation.
 
--r, --random [count]: generate a number of random combinations	\
+-r, --random [count]: generate a number of random combinations. The files that were generated with this flag, will have a "random_" prefix.	\
 -b, --black: set the background color to black	\
 -w, --white: set the background color to white	\
 -t, --transparent: set the background color to transparent (default option)
 
-##### IN PROGRESS:
+##### In progress:
 
 -s, --size: set the output size.
 Currently, because of the output size limitations, the advised size to be used for the layers if 1000px (1000 x 1000 px).
