@@ -22,20 +22,20 @@ This folder will contain the results of the generation.
 
 ### Usage & flags:
 
-1) Clone the folder to your system (git clone ...) \
-2) Create virtual environment (python -m venv .venv) \
-3) Install the required dependencies (pip install -r requirements.txt) \
-4) Run the script (python generate.py) \
+1) Clone the folder to your system (git clone ...)
+2) Create virtual environment (python -m venv .venv)
+3) Install the required dependencies (pip install -r requirements.txt)
+4) Run the script (python generate.py)
 
 
 #### Flags:
 
 --all: generate all possible combinations. Before the launch, the script will calculate the number of possible combinations and ask for a y/n confirmation.
 
--r, --random [count]: generate a number of random combinations
--b, --black: set the background color to black
--w, --white: set the background color to white
--t, --transparent: set the background color to transparent (default option)
+-r, --random [count]: generate a number of random combinations	\
+-b, --black: set the background color to black	\
+-w, --white: set the background color to white	\
+-t, --transparent: set the background color to transparent (default option)	\
 
 ##### IN PROGRESS:
 
