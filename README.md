@@ -29,8 +29,9 @@ This folder will contain the results of the generation.
 3) Activate virtual environment (source ./venv/bin/activate)
 4) Install the required dependencies (pip install -r requirements.txt)
 5) Paste the layer individual images (PNG) into the layers folder, grouped in individual layer directories
-6) Run the script (python generate.py)
-7) Open the folder (open .) to see the results (in the results folder)
+6) (optional) Set the occurence probabilities in the probalities.py file
+7) Run the script (python generate.py)
+8) Open the folder (open .) to see the results (in the results folder)
 
 
 #### Flags:

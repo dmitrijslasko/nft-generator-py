@@ -3,22 +3,23 @@ import os
 import random
 from probabilities import PROBABILITIES
 import itertools
-from config import *
+import config
 import argparse
 
-output_image_size = 1000
+output_image_size = config.OUTPUT_SIZE
 layer_image_size = output_image_size
 
-FILENAME_SPLIT_ELEMENT = "_"
 REUSE_BASE = False
 background_color = ()
 args = ()
 
+# Creates an image
 def create_image():
 	image = Image.new("RGBA", (output_image_size, output_image_size), background_color)
 	return image
 
 
+# Sets the background color
 def set_background_color(color):
 	global background_color
 	background_color = color
@@ -26,17 +27,17 @@ def set_background_color(color):
 	
 
 def	get_feature_variations(feature_type):
-	feature_dir = [d for d in sorted(os.listdir(LAYERS_BASE_PATH)) if d.endswith(f"{feature_type}")]
+	feature_dir = [d for d in sorted(os.listdir(config.LAYERS_BASE_PATH)) if d.endswith(f"{feature_type}")]
 	# print(feature_dir)
-	feature_variations = [f for f in os.listdir(LAYERS_BASE_PATH + feature_dir[0]) if f.endswith(".png")]
+	feature_variations = [f for f in os.listdir(config.LAYERS_BASE_PATH + feature_dir[0]) if f.endswith(".png")]
 	return sorted(feature_variations)
 
 
 def apply_feature_to_image(image, feature_path, feature_label):
 	# Open the image with the feature
-	feature_img = Image.open(LAYERS_BASE_PATH + feature_label + "/" + feature_path)
+	feature_img = Image.open(config.LAYERS_BASE_PATH + feature_label + "/" + feature_path)
 	# Take into account the set probability (from the probabilities.py files)
-	probability = PROBABILITIES.get(LAYERS_BASE_PATH + feature_label + "/" + feature_path, 1)
+	probability = PROBABILITIES.get(config.LAYERS_BASE_PATH + feature_label + "/" + feature_path, 1)
 	if probability == 1:
 		probability = PROBABILITIES.get(os.path.basename(feature_path), 1)
 		
@@ -47,10 +48,11 @@ def apply_feature_to_image(image, feature_path, feature_label):
 
 
 def get_feature_directories():
-	directories = sorted([name for name in os.listdir(LAYERS_BASE_PATH) if os.path.isdir(os.path.join(LAYERS_BASE_PATH, name))])
+	directories = sorted([name for name in os.listdir(config.LAYERS_BASE_PATH) if os.path.isdir(os.path.join(config.LAYERS_BASE_PATH, name))])
 	return directories
 
 
+# Get ths layer size
 def get_layer_size():
 	directories = get_feature_directories()
 	list_of_features = []
@@ -59,10 +61,11 @@ def get_layer_size():
 		for f in features:
 			list_of_features.append(f)
 	# print (list_of_features)
-	image_size = get_image_size(LAYERS_BASE_PATH + directories[0] + "/" + list_of_features[0])
+	image_size = get_image_size(config.LAYERS_BASE_PATH + directories[0] + "/" + list_of_features[0])
 	return min(image_size)
 
 
+# Gets the image size
 def get_image_size(image_path):
     # Open the image file
     with Image.open(image_path) as img:
@@ -70,6 +73,7 @@ def get_image_size(image_path):
         width, height = img.size
     return width, height
 
+# Generates [count] x random images 
 def generate_random_image(count):
 	i = 0
 	while (i < count):
@@ -103,11 +107,10 @@ def get_name_from_feature_set(features):
 	feature_names_without_extensions = []
 	for f in features:
 		feature_names_without_extensions.append(str.split(f, ".png")[0])
-	return (RESULTS_BASE_PATH + FILENAME_SPLIT_ELEMENT.join(feature_names_without_extensions) + ".png")
+	return (config.RESULTS_BASE_PATH + config.FILENAME_SPLIT_ELEMENT.join(feature_names_without_extensions) + ".png")
 
 
 def	generate_image_from_feature_set(features, directories, reuse_base = True):
-
 	if reuse_base == True:
 		future_name = get_name_from_feature_set(features)
 		if get_closest_base_image(future_name):
@@ -116,38 +119,38 @@ def	generate_image_from_feature_set(features, directories, reuse_base = True):
 			starting_image = create_image()
 	else:
 		starting_image = create_image()
-	
 	resulting_image_name = ""
 	
 	for f in features:
-		f_path = LAYERS_BASE_PATH + directories[features.index(f)] + "/" + f
+		f_path = config.LAYERS_BASE_PATH + directories[features.index(f)] + "/" + f
 		apply_feature_to_image(starting_image, feature_path=f, feature_label=directories[features.index(f)])
 		resulting_image_name += str.split(f, ".")[0]
 		if features.index(f) != len(features) - 1:
-			resulting_image_name += FILENAME_SPLIT_ELEMENT
+			resulting_image_name += config.FILENAME_SPLIT_ELEMENT
 
 		if (features.index(f) < len(features) - 1 and reuse_base):
 			base_image_prefix = "base"
 		else:
 			base_image_prefix = ""
 
-		if (image_exists(RESULTS_BASE_PATH + base_image_prefix + resulting_image_name) == False):
+		if (image_exists(config.RESULTS_BASE_PATH + base_image_prefix + resulting_image_name) == False):
 			if reuse_base:
-				starting_image.save(RESULTS_BASE_PATH + base_image_prefix + resulting_image_name + ".png")
+				starting_image.save(config.RESULTS_BASE_PATH + base_image_prefix + resulting_image_name + ".png")
 
 	if not reuse_base:
-		starting_image.save(RESULTS_BASE_PATH + base_image_prefix + resulting_image_name + ".png")
-	print(RESULTS_BASE_PATH + resulting_image_name + ".png")
+		starting_image.save(config.RESULTS_BASE_PATH + base_image_prefix + resulting_image_name + ".png")
+	print(config.RESULTS_BASE_PATH + resulting_image_name + ".png")
 	print("-----------------------------------------------------------------------------")
 	return 0
 
 
+# Checks if an image with the given name or image_path exists
 def image_exists(image_name=None, image_path=None):
 	# print(f"image_exists: {image_path}")
 	if not image_name and not image_path:
 		return False
 	if image_path == None:
-		image_path = RESULTS_BASE_PATH + image_name
+		image_path = config.RESULTS_BASE_PATH + image_name
 	if (os.path.exists(image_path)):
 		# print("IMAGE EXISTS!")
 		return True
@@ -155,6 +158,7 @@ def image_exists(image_name=None, image_path=None):
 	return False
 
 
+# Returns the number of possible image combinations
 def	get_all_possible_image_count():
 	directories = get_feature_directories()
 	total_images_count = 1
@@ -164,12 +168,12 @@ def	get_all_possible_image_count():
 	return (total_images_count)
 	
 
+# Generates all possible combinations of features
 def generate_all_possible_images():
 	directories = get_feature_directories()
 	features = []
 	total_images_count = get_all_possible_image_count()
 
-	# Generate all possible combinations of features
 	for dir in directories:
 		features_list = list(get_feature_variations(dir))
 		features.append(features_list)
@@ -183,6 +187,7 @@ def generate_all_possible_images():
 	return total_images_count
 
 
+# Gets the closest parent image for the image given as the parameter
 def get_closest_base_image(filepath):
 	while (len(os.path.basename(filepath)) > 4):
 		if (image_exists(image_path=filepath)):
@@ -191,7 +196,7 @@ def get_closest_base_image(filepath):
 	return None
 
 
-def	get_image_parent(filepath, split_element=FILENAME_SPLIT_ELEMENT):
+def	get_image_parent(filepath, split_element=config.FILENAME_SPLIT_ELEMENT):
 	filename = os.path.basename(filepath)
 	# print(filename)
 	all_filename_parts = str.split(filename, split_element)
@@ -204,7 +209,7 @@ def delete_all_files_in_folder(folder_path):
 
 
 def delete_all_results():
-	delete_all_files_in_folder(RESULTS_BASE_PATH)
+	delete_all_files_in_folder(config.RESULTS_BASE_PATH)
 	return 0
 
 
@@ -233,13 +238,15 @@ def parse_args():
 
 	# Print arguments (for demonstration purposes)
 	if args.black:
-		set_background_color(BLACK)
+		set_background_color(config.BLACK)
 	elif args.white:
-		set_background_color(WHITE)
+		set_background_color(config.WHITE)
 	else:
-		set_background_color(TRANSPARENT)
+		set_background_color(config.TRANSPARENT)
 	if args.size:
 		output_image_size = args.size
+	else:
+		output_image_size = config.OUTPUT_SIZE
 
 
 if __name__ == "__main__":
